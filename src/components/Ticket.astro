@@ -1,0 +1,61 @@
+---
+import CreateTicket from "./CreateTicket.tsx";
+
+import { readdirSync } from "fs";
+import { join } from "path";
+
+const getImagesPublic = (
+  paths: string[],
+  extensions: ("jpg" | "jpeg" | "png" | "gif" | "svg" | "webp")[]
+) => {
+  const hasValidExtension = (file: string) =>
+    extensions.includes(file.split(".").pop() as any);
+
+  return paths.flatMap((path) => {
+    const dirPath = join(process.cwd(), `public/${path}`);
+    return readdirSync(dirPath)
+      .filter(hasValidExtension)
+      .map((file) => ({
+        path: `/${path}/${file}`,
+        name: file.split(".")[0] as string,
+        category: path.split("/").pop() as string,
+        extensions,
+        id: crypto.randomUUID()
+      }));
+  });
+};
+
+const iconPaths = {
+  desingSticker: "desing/sticker",
+};
+
+
+const designIcons = [
+  ...getImagesPublic([iconPaths.desingSticker], ["webp"])
+];
+
+const icons = [
+...designIcons];
+---
+
+<section id="ticket">
+  <h2>
+    <span
+    >
+      Create
+    </span>
+     ticket
+  </h2>
+  <CreateTicket client:load listImages={icons} />
+</section>
+
+
+<style>
+  h2
+  {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+</style>

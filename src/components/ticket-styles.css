@@ -1,0 +1,48 @@
+.build-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: clamp(1rem, 5%, 2rem);
+    height: 100dvh;
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+
+.ticket-list {
+    display: flex;
+    flex-wrap: wrap;
+    scrollbar-width: thin;
+    align-items: baseline;
+    align-content: flex-start;
+
+    button
+    {
+    outline: none;
+    border:  none;
+    }
+}
+
+.icon-sticker {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+
+}
+
+.ticket-container {
+    overflow-x: auto;
+
+    #droppable-ticket {
+        width: 670px;
+        height: 300px;
+        margin: auto;
+
+        #droppable-ticket-wrapper{
+             position: relative;
+             display: flex;
+             width: 100%;
+             height: 100%;
+             border-radius: var(--radius-inner);
+             background: rgba(0, 0, 0, 0.4);
+        }
+    }
+}
